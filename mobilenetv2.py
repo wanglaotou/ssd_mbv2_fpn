@@ -46,19 +46,37 @@ class LinearBottleneck(nn.Module):
 
     def forward(self, x):
         residual = x
+        # x = residual
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.activation(out)
 
         out = self.conv2(out)
+        # x = out      # -> ok
         out = self.bn2(out)
         out = self.activation(out)
+        # x = out    # -> ok
         out = self.conv3(out)
+        # x = out    # -> ok
         out = self.bn3(out)
+        x = out    # -> not ok  why???
         
         if self.stride == 1 and self.inplanes == self.outplanes:
             out += residual
-
+        # x = out     # -> ok
+        # print('out bottleneck_2:', x.shape)
+        # pytorch_bottleneck_2 = open('pytorch_bottleneck_6_after1.txt','a')
+        # x_md2_np = x.cpu().detach().numpy()
+        # global count
+        # count += 1
+        # if count == 6:
+        #     for i in range(x.shape[0]):
+        #         for j in range(x.shape[1]):
+        #             for m in range(x.shape[2]):
+        #                 for n in range(x.shape[3]):
+        #                     pytorch_bottleneck_2.write(str(x_md2_np[i][j][m][n])+'\n')
+        #             # pytorch_bottleneck_2.write('\n')
+        #     pytorch_bottleneck_2.write('=====================================\n')
         return out
 
 
@@ -66,6 +84,7 @@ class MobileNet2(nn.Module):
     """MobileNet2 implementation.
     """
 
+    # def __init__(self, scale=1.0, input_size=224, t=6, in_channels=3, num_classes=1000, activation=nn.ReLU6):
     def __init__(self, scale=1.0, input_size=224, t=6, in_channels=3, num_classes=1000, activation=nn.ReLU):
         """
         MobileNet2 constructor.

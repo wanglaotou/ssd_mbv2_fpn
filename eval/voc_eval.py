@@ -237,9 +237,9 @@ def voc_eval(detpath,
 
 
 if __name__=="__main__":
-    detpath = '/home/mario/Projects/SSD/SSD_mobilenetv2/eval/plate_mb_result_zhongdong_fpn_29w_thre045.txt'
-    annopath = '/media/mario/新加卷/DataSets/ALPR/zhongdong/Annotations'
-    imagesetfile = '/home/mario/Projects/SSD/SSD_mobilenetv2/eval/test_zhongdong.txt'
+    detpath = '/home/mario/Projects/SSD/SSD_mobilenetv2/eval/result_guonei_fpn_30w_thre045.txt'
+    annopath = '/media/mario/新加卷/DataSets/ALPR/guonei/Annotations'
+    imagesetfile = '/home/mario/Projects/SSD/SSD_mobilenetv2/eval/test_guonei.txt'
     classname = 'license_plate'
     cachedir = 'plate_eval'
     rec, prec, ap = voc_eval(detpath,
